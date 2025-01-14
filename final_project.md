@@ -1,80 +1,25 @@
 # Data-Science-and-machine-learning-for-the-biosciences-Assessment
-Data Science and machine learning for the biosciences – Assessment
-## Analysis and predictions regarding the characteristics of my research area based on satellite images, before commencing fieldwork
-## Introduction
 
-##Methods
+# Analysis and predictions regarding the characteristics of my research area based on satellite images, before commencing fieldwork
+
+## INTRODUCTION
+
+## METHODS
 ### - The data was obtained using Google Earth Engine (GEE), with the Mapbiomas User Toolkit for maps in Brazil.
 ### - The database was created by Elizabeth Renteria
 ### - Data set Book1. is a data set about 18 diferent sites (plots) from the Amazon forest in Brazil. These 18 transects are the same size, a radius of 2km, but each have a different composition of habitat type. Each of them can have a different combination between 11 habitat types. Having a maximal of 6 combination and a minimun or 1 single type. The measurements from the different habitat types in each transect was obtain using Google Earth Engine with satelitte images from 2013-2023 
-### - I used a second data (centerb) base to explore a bigger area than contains all 18 plots plus the area between the plots. An area of 30,000 m2 radius. I found it important to also analize this data base, because it can contain information thta is important to undertand the main land use differences in the whole area and not only snips of it 
+### - I used a second data (centerb) base to explore a bigger area than contains all 18 plots plus the area between the plots. An area of 30,000 m2 radius. I found it important to also analize this data base, because it can contain information thta is important to undertand the main land use differences in the whole area and not only snips of it.
 
-```python
-import pandas as pd
-import threadpoolctl
-import StandardScaler
-import matplotlib.pyplot as plt
-from statsmodels.stats.multicomp import pairwise_tukeyhsd
-import matplotlib
-from sklearn.cluster import KMeans
-import seaborn as sns
-from sklearn.preprocessing import StandardScaler
-from scipy.stats import f_oneway
-import statsmodels.api as sm
-from statsmodels.formula.api import ols
-import itertools
-import statsmodels.formula.api as smf
-from statsmodels.stats.multitest import multipletests
-from statsmodels.stats.anova import anova_lm
-from itertools import combinations
-from statsmodels.tsa.arima.model import ARIMA
-from sklearn.metrics import mean_absolute_error, mean_squared_error
-import numpy as np
-from sklearn.linear_model import LinearRegression
-```
+### - I used Python to analize and visualize the data.
+### - First, I used clustering to explore the data with k-means.
+### - Second, I created a Heatmap because the cluster plot is not very specific, so it would be better to have a heatmap, so we can see with more detail the difference in habitat composition.
+
+## RESULTS
+
+### This plot should plot the 4 clusters of the Area in squared meters of each plot(BufferID). But since each of the transects have the same Area and only changes the type of habitat, I can argue that the plot actually could represent the levels of homogenity or heterogenity of the plot. Cluster 1 are the more homogenous so they have more area because its only distributed in 1 habitat type. Cluster 0 are plots that have their area divided in 5 or 6 habitat types. Cluster 2, 3-4 habitat types. Cluster 3, 2-3 habitat types 
 
 
 ```python
-#############################################################################################################################################################
-
-#Data set Book1. is a data set about 18 diferent sites (plots) from the Amazon forest in Brazil. 
-#These 18 transects are the same size, a radius of 2km, but each have a different composition of habitat type.
-#Each of them can have a different combination between 11 habitat types. Having a maximal of 6 combination and a minimun or 1 single type.
-#The measurements from the different habitat types in each transect was obtain using Google Earth Engine with satelitte images from 2013-2023 
-
-df = pd.read_excel(r"C:\Users\vs24904\OneDrive - University of Bristol\Documents\Book1.xlsx")
-
-##############################               First, I am going to use some clustering to explore the data            ##################################
-
-# Group by BufferID and calculate the average area
-df_avg_area = df.groupby('BufferID')['Area_m2'].mean().reset_index()
-# Standardize the data
-scaler = StandardScaler()
-df_avg_area_scaled = scaler.fit_transform(df_avg_area[['Area_m2']])
-
-# Apply K-Means clustering
-kmeans = KMeans(n_clusters=4, random_state=0)
-df_avg_area['Cluster'] = kmeans.fit_predict(df_avg_area_scaled)
-
-# Plot the clusters
-
-plt.figure(figsize=(10, 6))
-sns.scatterplot(x='BufferID', y='Area_m2', hue='Cluster', data=df_avg_area, palette='viridis', s=100)
-plt.title('K-Means Clustering of each Plot by Average Area')
-plt.xlabel('Plot')
-plt.ylabel('Average Area (m²)')
-plt.legend(title='Cluster')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig('K-Means Clustering of Buffer Zones by Average Area (18plots).png')
-plt.show()
-#This plot should plot the 4 clusters of the Area in squared meters of each plot(BufferID). 
-#But since each of the transects have the same Area and only changes the type of habitat, I can argue that the plot actually could represent the levels of
-#homogenity or heterogenity of the plot. 
-#Cluster 1 are the more homogenous so they have more area because its only distributed in 1 habitat type
-#Cluster 0 are plots that have their area divided in 5 or 6 habitat types
-#Cluster 2, 3-4 habitat types
-#Cluster 3, 2-3 habitat types 
 
 
 
