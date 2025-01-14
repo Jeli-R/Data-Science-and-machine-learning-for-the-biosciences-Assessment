@@ -3,7 +3,11 @@ Data Science and machine learning for the biosciences – Assessment
 ## Analysis and predictions regarding the characteristics of my research area based on satellite images, before commencing fieldwork
 ## Introduction
 
-
+##Methods
+### - The data was obtained using Google Earth Engine (GEE), with the Mapbiomas User Toolkit for maps in Brazil.
+### - The database was created by Elizabeth Renteria
+### - Data set Book1. is a data set about 18 diferent sites (plots) from the Amazon forest in Brazil. These 18 transects are the same size, a radius of 2km, but each have a different composition of habitat type. Each of them can have a different combination between 11 habitat types. Having a maximal of 6 combination and a minimun or 1 single type. The measurements from the different habitat types in each transect was obtain using Google Earth Engine with satelitte images from 2013-2023 
+### - I used a second data (centerb) base to explore a bigger area than contains all 18 plots plus the area between the plots. An area of 30,000 m2 radius. I found it important to also analize this data base, because it can contain information thta is important to undertand the main land use differences in the whole area and not only snips of it 
 
 ```python
 import pandas as pd
