@@ -112,13 +112,13 @@ Data-Science-and-machine-learning-for-the-biosciences-Assessment
 
 ### This analysis provides key insights into the habitat composition and land use trends within the Amazon region of Brazil:
 
-### ForestFormation is the dominant habitat across most plots but is expected to decrease over the next 5 years, based on time series forecasts. This indicates a potential decline in this critical habitat, which is concerning for biodiversity.
+### - ForestFormation is the dominant habitat across most plots but is expected to decrease over the next 5 years, based on time series forecasts. This indicates a potential decline in this critical habitat, which is concerning for biodiversity.
 
-### Pasture and OilPalm habitats are expected to increase in some areas. This reflects ongoing land use change, with Pasture expanding and OilPalm potentially continuing its spread, although some discrepancies in forecasts suggest complexities in modeling these habitat dynamics.
+### - Pasture and OilPalm habitats are expected to increase in some areas. This reflects ongoing land use change, with Pasture expanding and OilPalm potentially continuing its spread, although some discrepancies in forecasts suggest complexities in modeling these habitat dynamics.
 
-### Cluster analysis highlighted differences in habitat homogeneity across plots. Some plots are dominated by a single habitat type (ForestFormation), while others show more diverse land use patterns with multiple habitat types.
+### - Cluster analysis highlighted differences in habitat homogeneity across plots. Some plots are dominated by a single habitat type (ForestFormation), while others show more diverse land use patterns with multiple habitat types.
 
-### Linear regression models indicate that ForestFormation is expanding in some areas, but the overall trend suggests a decline, while Pasture and OilPalm are growing, contributing to the shift toward disturbance-prone habitats.
+### - Linear regression models indicate that ForestFormation is expanding in some areas, but the overall trend suggests a decline, while Pasture and OilPalm are growing, contributing to the shift toward disturbance-prone habitats.
 
 ### These findings underscore the need for ongoing monitoring of habitat trends, particularly in light of the expected decline in ForestFormation and the increasing presence of Pasture and OilPalm, which could have long-term ecological consequences. Future fieldwork will be essential to validate these predictions and further explore the impacts of these habitat changes on the region’s biodiversity.
 
