@@ -9,98 +9,27 @@
 ### - The database was created by Elizabeth Renteria
 ### - Data set Book1. is a data set about 18 diferent sites (plots) from the Amazon forest in Brazil. These 18 transects are the same size, a radius of 2km, but each have a different composition of habitat type. Each of them can have a different combination between 11 habitat types. Having a maximal of 6 combination and a minimun or 1 single type. The measurements from the different habitat types in each transect was obtain using Google Earth Engine with satelitte images from 2013-2023 
 ### - I used a second data (centerb) base to explore a bigger area than contains all 18 plots plus the area between the plots. An area of 30,000 m2 radius. I found it important to also analize this data base, because it can contain information thta is important to undertand the main land use differences in the whole area and not only snips of it.
-
+### Data Analysis
 ### - I used Python to analize and visualize the data.
 ### - First, I used clustering to explore the data with k-means.
 ### - Second, I created a Heatmap because the cluster plot is not very specific, so it would be better to have a heatmap, so we can see with more detail the difference in habitat composition.
+### - Third, perform an ANOVA to see if the differences in the heatmaps are significant
 
 ## RESULTS
 
 ### This plot should plot the 4 clusters of the Area in squared meters of each plot(BufferID). But since each of the transects have the same Area and only changes the type of habitat, I can argue that the plot actually could represent the levels of homogenity or heterogenity of the plot. Cluster 1 are the more homogenous so they have more area because its only distributed in 1 habitat type. Cluster 0 are plots that have their area divided in 5 or 6 habitat types. Cluster 2, 3-4 habitat types. Cluster 3, 2-3 habitat types 
 
+### In this heatmap we can see that our main habitat type is "Forest formation" in most plots, followed by "OilPalm". We can also observed than a lot of the other habitat types contribute with less than 1 percent to the plots composition.
+
+### In this heatmap we can see that our main habitat type is "Forest formation" all Years, followed by "OilPalm". The percentages dont really change across the years.
+
+### ANOVA for Plots. There is a significant difference between the plots, being plot TAI_02 and TAI_09 the ones that produce this difference. Plot TAI_02 and TAI_09 are the plots that are compound by only one habitat type (ForestFormation)
+
+### ANOVA for Habitat Type
 
 ```python
 
 
-
-##########################################################          HEATMAP          ######################################################################
-
-#Actually the cluster plot is not very specific, so it would be better to have a heatmap, so we can see with more detail the difference in habitat composition
-
-#########   HEAT MAP FOR HABITAT TYPE PER PLOT
-
-# Aggregate by BufferID and Areas to calculate the average proportion across all years
-df_avg_proportion = df.groupby(['BufferID', 'Type'])['Area_m2'].sum().reset_index()
-# Calculate the proportion of Area_m2 for each Area within each Plot
-df_avg_proportion['Proportion'] = df_avg_proportion.groupby('BufferID')['Area_m2'].transform(lambda x: x / x.sum())
-# Pivot the data for heatmap
-df_pivot_avg = df_avg_proportion.pivot_table(values='Proportion', index='BufferID', columns='Type', fill_value=0)
-
-#Plot the heatmap
-#In the heatmap we can see that our main habitat type is "Forest formation" in most plots, followed by "OilPalm".
-#We can also observed than a lot of the other habitat types contribute with less than 1 percent to the plots composition.
-plt.figure(figsize=(12, 8))
-sns.heatmap(df_pivot_avg, cmap='PiYG', annot=True, fmt='.2f', linewidths=0.5)
-plt.title('Average Proportion of Total Area by Habitat Type for Each Plot')
-plt.xlabel('Habitat Type')
-plt.ylabel('Plot')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig('HEAT MAP FOR HABITAT TYPE PER PLOT (18plots).png')
-plt.show()
-
-
-#########   HEAT MAP FOR HABITAT TYPE PER YEAR
-
-# Aggregate by BufferID and Areas to calculate the average proportion across all years
-df_avg_proportion = df.groupby(['Date', 'Type'])['Area_m2'].sum().reset_index()
-# Calculate the proportion of Area_m2 for each Area within each Plot
-df_avg_proportion['Proportion'] = df_avg_proportion.groupby('Date')['Area_m2'].transform(lambda x: x / x.sum())
-# Pivot the data for heatmap
-df_pivot_avg = df_avg_proportion.pivot_table(values='Proportion', index='Date', columns='Type', fill_value=0)
-
-#Plot the heatmap
-#In the heatmap we can see that our main habitat type is "Forest formation" all Years, followed by "OilPalm".
-#The percentages dont really change across the years.
-plt.figure(figsize=(12, 8))
-sns.heatmap(df_pivot_avg, cmap='PiYG', annot=True, fmt='.2f', linewidths=0.5)
-plt.title('Average Proportion of Total Area by Habitat Type for Each Year')
-plt.xlabel('Habitat Type')
-plt.ylabel('Year')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig('HEAT MAP FOR HABITAT TYPE PER YEAR (18plots).png')
-plt.show()
-
-
-
-
-
-##############################                     ARE THE DIFFERENCES IN THE HEAT MAPS SIGNIFICANT                                ####################
-
-#################       ANOVA for Plot (BufferID)
-
-buffer_groups = [df[df['BufferID'] == buffer]['Area_m2'].values for buffer in df['BufferID'].unique()]
-anova_buffer = f_oneway(*buffer_groups)
-print("ANOVA for BufferID:")
-print(f"F-statistic: {anova_buffer.statistic}, p-value: {anova_buffer.pvalue}")
-
-# Perform Tukey's HSD test for BufferID
-tukey_type = pairwise_tukeyhsd(endog=df['Area_m2'], groups=df['BufferID'], alpha=0.05)
-# Display the results
-print("\nTukey HSD Test for PLot:")
-print(tukey_type)
-# Visualize the Tukey HSD results
-tukey_type.plot_simultaneous()
-plt.title("Tukey HSD Test for Plot")
-plt.xlabel('Mean Difference')
-plt.grid(True)
-plt.savefig('Tukey plot (18plots).png')
-plt.show()
-#There is a significant difference between the plots, being plot TAI_02 and TAI_09 the ones that produce this difference.
-#Plot TAI_02 and TAI_09 are the plots that are compound by only one habitat type (ForestFormation)
-
-###################################################################################################
 #################         ANOVA for Type
 
 type_groups = [df[df['Type'] == buffer]['Area_m2'].values for buffer in df['Type'].unique()]
