@@ -86,165 +86,19 @@
 
 ## Linear Regression
 
+![png](output_2_30.png)
 #### ForestFormation. The linear regression indicates a signficative increase of 1.528e+07 m2 every year (ForestFormation area). The R-squared is high, so the variance can be explain by this model
+
+![png](output_2_33.png)
 #### OilPalm. The linear regression indicates a signficative increase of 9.968e+06 m2 every year (Oilpalm area). The R-squared is not that high, so  the variance cannot be fully explain by this model
+
+![png](output_2_36.png)
 #### Pasture. The linear regression indicates a signficative increase of 9.929e+06 m2 every year (Pasture area). The R-squared is not that high, so  the variance cannot be fully explain by this model
+
+![png](output_2_39.png)
 #### Floodplain.  The linear regression indicates a signficative decrease of Floofplains area of 3.537e+06 m2, every year. The high R-squared indicates that the variance can be explain by this model
 ```python
 
     
 
 
-
-    
-![png](output_2_28.png)
-    
-
-
-    C:\Users\vs24904\AppData\Local\anaconda32\Lib\site-packages\scipy\stats\_axis_nan_policy.py:430: UserWarning: `kurtosistest` p-value may be inaccurate with fewer than 20 observations; only n=11 observations were given.
-      return hypotest_fun_in(*args, **kwds)
-    
-
-
-    
-![png](output_2_30.png)
-    
-
-
-                                OLS Regression Results                            
-    ==============================================================================
-    Dep. Variable:                Area_m2   R-squared:                       0.939
-    Model:                            OLS   Adj. R-squared:                  0.932
-    Method:                 Least Squares   F-statistic:                     138.8
-    Date:                Tue, 14 Jan 2025   Prob (F-statistic):           9.02e-07
-    Time:                        12:51:59   Log-Likelihood:                -195.19
-    No. Observations:                  11   AIC:                             394.4
-    Df Residuals:                       9   BIC:                             395.2
-    Df Model:                           1                                         
-    Covariance Type:            nonrobust                                         
-    ====================================================================================
-                           coef    std err          t      P>|t|      [0.025      0.975]
-    ------------------------------------------------------------------------------------
-    const             1.347e+09   7.68e+06    175.484      0.000    1.33e+09    1.36e+09
-    BufferID_encoded -1.528e+07    1.3e+06    -11.780      0.000   -1.82e+07   -1.23e+07
-    ==============================================================================
-    Omnibus:                        5.232   Durbin-Watson:                   1.340
-    Prob(Omnibus):                  0.073   Jarque-Bera (JB):                2.380
-    Skew:                          -1.125   Prob(JB):                        0.304
-    Kurtosis:                       3.357   Cond. No.                         11.3
-    ==============================================================================
-    
-    Notes:
-    [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-    
-
-    C:\Users\vs24904\AppData\Local\anaconda32\Lib\site-packages\scipy\stats\_axis_nan_policy.py:430: UserWarning: `kurtosistest` p-value may be inaccurate with fewer than 20 observations; only n=11 observations were given.
-      return hypotest_fun_in(*args, **kwds)
-    
-
-
-    
-![png](output_2_33.png)
-    
-
-
-                                OLS Regression Results                            
-    ==============================================================================
-    Dep. Variable:                Area_m2   R-squared:                       0.772
-    Model:                            OLS   Adj. R-squared:                  0.747
-    Method:                 Least Squares   F-statistic:                     30.53
-    Date:                Tue, 14 Jan 2025   Prob (F-statistic):           0.000368
-    Time:                        12:51:59   Log-Likelihood:                -198.82
-    No. Observations:                  11   AIC:                             401.6
-    Df Residuals:                       9   BIC:                             402.4
-    Df Model:                           1                                         
-    Covariance Type:            nonrobust                                         
-    ====================================================================================
-                           coef    std err          t      P>|t|      [0.025      0.975]
-    ------------------------------------------------------------------------------------
-    const             4.511e+08   1.07e+07     42.268      0.000    4.27e+08    4.75e+08
-    BufferID_encoded  9.968e+06    1.8e+06      5.526      0.000    5.89e+06     1.4e+07
-    ==============================================================================
-    Omnibus:                        1.989   Durbin-Watson:                   0.403
-    Prob(Omnibus):                  0.370   Jarque-Bera (JB):                1.051
-    Skew:                          -0.408   Prob(JB):                        0.591
-    Kurtosis:                       1.725   Cond. No.                         11.3
-    ==============================================================================
-    
-    Notes:
-    [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-    
-
-    C:\Users\vs24904\AppData\Local\anaconda32\Lib\site-packages\scipy\stats\_axis_nan_policy.py:430: UserWarning: `kurtosistest` p-value may be inaccurate with fewer than 20 observations; only n=11 observations were given.
-      return hypotest_fun_in(*args, **kwds)
-    
-
-
-    
-![png](output_2_36.png)
-    
-
-
-                                OLS Regression Results                            
-    ==============================================================================
-    Dep. Variable:                Area_m2   R-squared:                       0.664
-    Model:                            OLS   Adj. R-squared:                  0.627
-    Method:                 Least Squares   F-statistic:                     17.78
-    Date:                Tue, 14 Jan 2025   Prob (F-statistic):            0.00225
-    Time:                        12:51:59   Log-Likelihood:                -201.75
-    No. Observations:                  11   AIC:                             407.5
-    Df Residuals:                       9   BIC:                             408.3
-    Df Model:                           1                                         
-    Covariance Type:            nonrobust                                         
-    ====================================================================================
-                           coef    std err          t      P>|t|      [0.025      0.975]
-    ------------------------------------------------------------------------------------
-    const             5.674e+08   1.39e+07     40.728      0.000    5.36e+08    5.99e+08
-    BufferID_encoded  9.929e+06   2.35e+06      4.217      0.002     4.6e+06    1.53e+07
-    ==============================================================================
-    Omnibus:                        0.401   Durbin-Watson:                   0.842
-    Prob(Omnibus):                  0.818   Jarque-Bera (JB):                0.492
-    Skew:                           0.278   Prob(JB):                        0.782
-    Kurtosis:                       2.126   Cond. No.                         11.3
-    ==============================================================================
-    
-    Notes:
-    [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-    
-
-    C:\Users\vs24904\AppData\Local\anaconda32\Lib\site-packages\scipy\stats\_axis_nan_policy.py:430: UserWarning: `kurtosistest` p-value may be inaccurate with fewer than 20 observations; only n=11 observations were given.
-      return hypotest_fun_in(*args, **kwds)
-    
-
-
-    
-![png](output_2_39.png)
-    
-
-
-                                OLS Regression Results                            
-    ==============================================================================
-    Dep. Variable:                Area_m2   R-squared:                       0.942
-    Model:                            OLS   Adj. R-squared:                  0.935
-    Method:                 Least Squares   F-statistic:                     145.8
-    Date:                Tue, 14 Jan 2025   Prob (F-statistic):           7.30e-07
-    Time:                        12:52:00   Log-Likelihood:                -178.82
-    No. Observations:                  11   AIC:                             361.6
-    Df Residuals:                       9   BIC:                             362.4
-    Df Model:                           1                                         
-    Covariance Type:            nonrobust                                         
-    ====================================================================================
-                           coef    std err          t      P>|t|      [0.025      0.975]
-    ------------------------------------------------------------------------------------
-    const             3.563e+08   1.73e+06    205.574      0.000    3.52e+08     3.6e+08
-    BufferID_encoded -3.537e+06   2.93e+05    -12.074      0.000    -4.2e+06   -2.87e+06
-    ==============================================================================
-    Omnibus:                        0.179   Durbin-Watson:                   1.005
-    Prob(Omnibus):                  0.914   Jarque-Bera (JB):                0.258
-    Skew:                           0.228   Prob(JB):                        0.879
-    Kurtosis:                       2.403   Cond. No.                         11.3
-    ==============================================================================
-    
-    Notes:
-    [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-    
