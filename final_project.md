@@ -1,6 +1,6 @@
 # Data-Science-and-machine-learning-for-the-biosciences-Assessment
 
-# Analysis and predictions regarding the characteristics of my research area based on satellite images, before commencing fieldwork
+# nalysis and predictions regarding the characteristics of my research area based on satellite images, before commencing fieldwork
 
 ## INTRODUCTION
 
@@ -9,69 +9,40 @@
 ### - The database was created by Elizabeth Renteria
 ### - Data set Book1. is a data set about 18 diferent sites (plots) from the Amazon forest in Brazil. These 18 transects are the same size, a radius of 2km, but each have a different composition of habitat type. Each of them can have a different combination between 11 habitat types. Having a maximal of 6 combination and a minimun or 1 single type. The measurements from the different habitat types in each transect was obtain using Google Earth Engine with satelitte images from 2013-2023 
 ### - I used a second data (centerb) base to explore a bigger area than contains all 18 plots plus the area between the plots. An area of 30,000 m2 radius. I found it important to also analize this data base, because it can contain information thta is important to undertand the main land use differences in the whole area and not only snips of it.
-### Data Analysis
+
+## Data Analysis
 ### - I used Python to analize and visualize the data.
 ### - First, I used clustering to explore the data with k-means.
 ### - Second, I created a Heatmap because the cluster plot is not very specific, so it would be better to have a heatmap, so we can see with more detail the difference in habitat composition.
 ### - Third, perform an ANOVA to see if the differences in the heatmaps are significant
+### - Fourth, perform a time series analysis with a 5 year forecast.
+### - Fifth, perform a linear regression only in the secon data base, to see the relationship between the area of the 4 most important habitat types in the last 11 years.
 
 ## RESULTS
 
+## Clusters
 ### This plot should plot the 4 clusters of the Area in squared meters of each plot(BufferID). But since each of the transects have the same Area and only changes the type of habitat, I can argue that the plot actually could represent the levels of homogenity or heterogenity of the plot. Cluster 1 are the more homogenous so they have more area because its only distributed in 1 habitat type. Cluster 0 are plots that have their area divided in 5 or 6 habitat types. Cluster 2, 3-4 habitat types. Cluster 3, 2-3 habitat types 
 
+## Heatmaps
 ### In this heatmap we can see that our main habitat type is "Forest formation" in most plots, followed by "OilPalm". We can also observed than a lot of the other habitat types contribute with less than 1 percent to the plots composition.
 
 ### In this heatmap we can see that our main habitat type is "Forest formation" all Years, followed by "OilPalm". The percentages dont really change across the years.
 
+## ANOVA
 ### ANOVA for Plots. There is a significant difference between the plots, being plot TAI_02 and TAI_09 the ones that produce this difference. Plot TAI_02 and TAI_09 are the plots that are compound by only one habitat type (ForestFormation)
 
-### ANOVA for Habitat Type
+### ANOVA for Habitat Type. There is a significant difference between the Habitat types, being ForestFormation and OilPalm the ones thta produce this difference.
+#Both types are the one with the largest area_m2
+
+### ANOVA for Year. There was no a significant in the area differences between the 11 years
+
+## Time Analysis and Forecast
+
 
 ```python
 
 
-#################         ANOVA for Type
 
-type_groups = [df[df['Type'] == buffer]['Area_m2'].values for buffer in df['Type'].unique()]
-anova_type = f_oneway(*type_groups)
-print("ANOVA for Type:")
-print(f"F-statistic: {anova_type.statistic}, p-value: {anova_type.pvalue}")
-
-# Perform Tukey's HSD test for Type
-tukey_type = pairwise_tukeyhsd(endog=df['Area_m2'], groups=df['Type'], alpha=0.05)
-# Display the results
-print("\nTukey HSD Test for Type:")
-print(tukey_type)
-# Visualize the Tukey HSD results
-tukey_type.plot_simultaneous()
-plt.title("Tukey HSD Test for Habitat Type")
-plt.xlabel('Mean Difference')
-plt.grid(True)
-plt.savefig('Tukey type (18plots).png')
-plt.show()
-#There is a significant difference between the Habitat types, being ForestFormation and OilPalm the ones thta produce this difference.
-#Both types are the one with the largest area_m2
-
-######################################################################################
-#################      ANOVA for Year
-year_groups = [df[df['Date'] == year]['Area_m2'].values for year in df['Date'].unique()]
-anova_year = f_oneway(*year_groups)
-print("\nANOVA for Year:")
-print(f"F-statistic: {anova_year.statistic}, p-value: {anova_year.pvalue}")
-
-# Perform Tukey's HSD test for Year
-tukey_type = pairwise_tukeyhsd(endog=df['Area_m2'], groups=df['Date'], alpha=0.05)
-# Display the results
-print("\nTukey HSD Test for Year:")
-print(tukey_type)
-# Visualize the Tukey HSD results
-tukey_type.plot_simultaneous()
-plt.title("Tukey HSD Test for Year")
-plt.xlabel('Mean Difference')
-plt.grid(True)
-plt.savefig('Tukey date (18plots).png')
-plt.show()
-#There was no a significant in the area differences between the 11 years
 
 ################################################################################################################################################
 #########################################
